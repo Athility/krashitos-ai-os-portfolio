@@ -7,22 +7,22 @@ interface BootSequenceProps {
     onComplete: () => void;
 }
 
+const BOOT_LOG = [
+    "INITIALIZING KRASHITOS AI SYSTEM v1.0.0",
+    "Establishing secure connection...",
+    "[OK] Connection established.",
+    "Loading core modules...",
+    "[OK] AI Core Online",
+    "[OK] Knowledge Base Online",
+    "[OK] Skill Matrix Online",
+    "[OK] Project Engine Online",
+    "[WARN] Overriding standard protocols...",
+    "System ready. Welcome."
+];
+
 export function BootSequence({ onComplete }: BootSequenceProps) {
     const [lines, setLines] = useState<string[]>([]);
     const [showCursor, setShowCursor] = useState(true);
-
-    const bootLog = [
-        "INITIALIZING KRASHITOS AI SYSTEM v1.0.0",
-        "Establishing secure connection...",
-        "[OK] Connection established.",
-        "Loading core modules...",
-        "[OK] AI Core Online",
-        "[OK] Knowledge Base Online",
-        "[OK] Skill Matrix Online",
-        "[OK] Project Engine Online",
-        "[WARN] Overriding standard protocols...",
-        "System ready. Welcome."
-    ];
 
     useEffect(() => {
         // Blinking cursor
@@ -35,8 +35,10 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
 
         // Add lines progressively
         const sequenceInterval = setInterval(() => {
-            if (lineIndex < bootLog.length) {
-                setLines(prev => [...prev, bootLog[lineIndex]]);
+            if (lineIndex < BOOT_LOG.length) {
+                // Ensure we capture the exact string and default to empty string if undefined (fallback)
+                const nextLine = BOOT_LOG[lineIndex] || "";
+                setLines(prev => [...prev, nextLine]);
                 lineIndex++;
             } else {
                 clearInterval(sequenceInterval);
@@ -67,9 +69,9 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
                             key={index}
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className={`text-sm sm:text-base md:text-lg mb-2 ${line.includes("[WARN]") ? "text-[#ffaa00]" :
-                                    line.includes("[OK]") ? "text-accent" :
-                                        "text-primary"
+                            className={`text-sm sm:text-base md:text-lg mb-2 ${line?.includes("[WARN]") ? "text-[#ffaa00]" :
+                                line?.includes("[OK]") ? "text-accent" :
+                                    "text-primary"
                                 }`}
                         >
                             {`> ${line}`}
@@ -78,7 +80,7 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
                 </AnimatePresence>
 
                 {/* Active line with cursor */}
-                {lines.length < bootLog.length && (
+                {lines.length < BOOT_LOG.length && (
                     <div className="flex text-sm sm:text-base md:text-lg text-primary">
                         <span>{`> `}</span>
                         <span className={`${showCursor ? "opacity-100" : "opacity-0"}`}>_</span>
