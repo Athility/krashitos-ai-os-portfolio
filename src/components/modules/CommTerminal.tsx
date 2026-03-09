@@ -29,7 +29,7 @@ export function CommTerminal() {
                         </div>
                         <div>
                             <p className="text-white font-medium mb-1 group-hover:text-primary transition-colors">Transmissions via Email</p>
-                            <p className="font-mono text-xs text-secondary tracking-widest uppercase opacity-80">krashitos@example.com</p>
+                            <p className="font-mono text-xs text-secondary tracking-widest uppercase opacity-80">krashitos96420@gmail.com</p>
                         </div>
                     </motion.a>
 

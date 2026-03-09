@@ -8,14 +8,14 @@ export interface ProcessedCommand {
 
 const COMMAND_MAP = [
     {
-        patterns: [/(tell me )?about krashitos/i, /who is krashitos/i, /who are you/i, /identity/i, /background/i],
-        response: "Krashitos is an 18-year-old AI-native builder orchestrating automated systems and intelligent web tools. Currently pursuing B.Tech in AI & Data Science in Mumbai.",
+        patterns: [/(tell me )?about (atharva|krashitos)/i, /who is (atharva|krashitos)/i, /who are you/i, /identity/i, /background/i],
+        response: "Atharva Shinde is an 18-year-old AI-native builder orchestrating automated systems and intelligent web tools. Currently pursuing B.Tech in AI & Data Science in Mumbai.",
         action: "NAVIGATE",
         moduleId: "Knowledge Base"
     },
     {
         patterns: [/(show )?projects/i, /what have you built/i, /portfolio/i, /work/i],
-        response: "Accessing Project Engine. Krashitos has shipped tools like Cinematiq AI Shot List and Sports Moments AI.",
+        response: "Accessing Project Engine. Atharva has shipped tools like Cinematiq AI Shot List and Sports Moments AI.",
         action: "NAVIGATE",
         moduleId: "Project Engine"
     },
@@ -39,7 +39,7 @@ const COMMAND_MAP = [
     },
     {
         patterns: [/(hello|hi|hey|greetings)/i, /initialize/i],
-        response: "Greetings. I am the KRASHITOS AI-OS Assistant. You can ask me to open specific modules or tell you about Krashitos.",
+        response: "Greetings. I am the Atharva Shinde AI-OS Assistant. You can ask me to open specific modules or tell you more about Atharva.",
         action: "NONE"
     }
 ];

@@ -10,7 +10,7 @@ export function KnowledgeBase() {
                 <div>
                     <h3 className="text-2xl font-bold text-white mb-4">Identity File</h3>
                     <p className="text-white/70 leading-relaxed">
-                        I'm <span className="text-primary font-medium">Krashitos</span>, an 18-year-old AI-native builder.
+                        I'm <span className="text-primary font-medium">Atharva Shinde</span>, an 18-year-old AI-native builder.
                         I don't just write code; I orchestrate automated systems and intelligent web tools.
                         Currently pursuing my first year of B.Tech in AI & Data Science at Shah and Anchor Kutchhi Engineering College in Mumbai.
                     </p>
