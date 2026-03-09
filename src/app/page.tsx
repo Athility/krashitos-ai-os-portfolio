@@ -70,7 +70,7 @@ export default function Home() {
     <main className="min-h-screen pt-24 pb-16 relative">
       <Navbar />
 
-      <DashboardGrid className={expandedModuleId ? "pointer-events-none blur-sm opacity-50 transition-all duration-500" : "transition-all duration-500"}>
+      <DashboardGrid className="transition-all duration-500 relative z-10">
         {modules.map((m) => (
           <ModulePanel
             key={m.id}
