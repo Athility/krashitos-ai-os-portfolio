@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Geist_Mono, Poppins } from "next/font/google";
+import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 const inter = Inter({
   variable: "--font-inter",
@@ -38,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${inter.variable} ${geistMono.variable} ${poppins.variable} antialiased bg-black min-h-screen selection:bg-primary/30 selection:text-white`}
+        className={`${inter.variable} ${geistMono.variable} antialiased bg-black min-h-screen selection:bg-primary/30 selection:text-white`}
       >
         <div className="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#0f172a]/40 via-background to-background pointer-events-none" />
         {children}

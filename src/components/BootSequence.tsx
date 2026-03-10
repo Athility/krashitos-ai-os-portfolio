@@ -8,11 +8,15 @@ interface BootSequenceProps {
 }
 
 const BOOT_LOG = [
-    "INITIALIZING KRASHITOS AI SYSTEM",
-    "Loading modules",
-    "AI Core Online",
-    "Project Engine Online",
-    "Skill Matrix Online",
+    "INITIALIZING KRASHITOS AI SYSTEM v1.0.0",
+    "Establishing secure connection...",
+    "[OK] Connection established.",
+    "Loading core modules...",
+    "[OK] AI Core Online",
+    "[OK] Knowledge Base Online",
+    "[OK] Skill Matrix Online",
+    "[OK] Project Engine Online",
+    "[WARN] Overriding standard protocols...",
     "System ready. Welcome."
 ];
 

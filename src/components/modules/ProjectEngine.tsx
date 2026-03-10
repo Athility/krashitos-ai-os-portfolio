@@ -8,21 +8,21 @@ const projects = [
         title: "Cinematiq AI Shot List",
         description: "An AI-powered cinematography shot list generator. Uses intelligent models to suggest camera angles, lighting, and movement for directors.",
         tech: ["Next.js", "AI Integration", "TailwindCSS"],
-        link: "https://vercel.com/krashos-projects-a330b819/cinematiq-ai-shot-list",
+        link: "https://cinematiq-ai-shot-list.vercel.app/",
         type: "AI Dashboard"
     },
     {
         title: "Sports Moments AI",
         description: "AI tool designed for sports highlight analysis. Automatically chapters and analyzes key moments in sporting events.",
         tech: ["React", "Video AI", "TypeScript"],
-        link: "https://vercel.com/krashos-projects-a330b819/sports-moments-ai",
+        link: "https://sports-moments-ai.vercel.app/",
         type: "Video Intelligence"
     },
     {
         title: "Spice Site",
         description: "A premium modern web experience built for spice products, showcasing fluid animations and creative UI direction.",
         tech: ["Next.js", "Framer Motion", "E-commerce UI"],
-        link: "https://vercel.com/krashos-projects-a330b819/spice-site",
+        link: "https://spice-site.vercel.app/",
         type: "Premium UI"
     }
 ];

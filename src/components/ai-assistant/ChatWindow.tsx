@@ -50,7 +50,7 @@ export function ChatWindow({ isOpen, onClose, onNavigate }: ChatWindowProps) {
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: 20 }}
                     transition={{ duration: 0.3 }}
-                    className="fixed top-20 right-6 w-[350px] sm:w-[400px] h-[500px] max-h-[75vh] glass-panel z-50 flex flex-col shadow-[0_10px_40px_rgba(0,0,0,0.5)] border border-primary/20 overflow-hidden"
+                    className="fixed bottom-24 right-6 w-[350px] sm:w-[400px] h-[500px] max-h-[70vh] glass-panel z-50 flex flex-col shadow-[0_10px_40px_rgba(0,0,0,0.5)] border border-primary/20 overflow-hidden"
                 >
                     {/* Header */}
                     <div className="h-14 bg-surface/80 border-b border-border flex items-center justify-between px-4">
@@ -81,8 +81,8 @@ export function ChatWindow({ isOpen, onClose, onNavigate }: ChatWindowProps) {
                                 </div>
 
                                 <div className={`p-3 rounded-2xl text-sm ${msg.role === "user"
-                                    ? "bg-white/10 text-white rounded-tr-sm"
-                                    : "bg-primary/10 text-white/90 border border-primary/20 rounded-tl-sm"
+                                        ? "bg-white/10 text-white rounded-tr-sm"
+                                        : "bg-primary/10 text-white/90 border border-primary/20 rounded-tl-sm"
                                     }`}>
                                     {msg.text}
                                 </div>
