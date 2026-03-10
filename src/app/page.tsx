@@ -14,7 +14,6 @@ import { Cpu, Terminal, Briefcase, UserCircle, Rocket, Database } from "lucide-r
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -99,7 +98,22 @@ export default function Home() {
       { opacity: 1, y: 0, duration: 1 }
     ).to(introTextRef.current, { opacity: 0, y: -50, delay: 0.5 });
 
-    // Dashboard entrance handled by Framer Motion in DashboardGrid to avoid Lenis/GSAP scroll bugs
+    // 3. Dashboard Entrance
+    const dashboardTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: dashboardContainerRef.current,
+        start: "top bottom-=100",
+        toggleActions: "play none none reverse",
+      }
+    });
+
+    dashboardTl.from(".module-panel-card", {
+      y: 100,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: "power3.out"
+    });
 
     return () => {
       ScrollTrigger.getAll().forEach(t => t.kill());
@@ -164,14 +178,7 @@ export default function Home() {
       >
         <DashboardGrid className="transition-all duration-500">
           {modules.map((m) => (
-            <motion.div
-              key={m.id}
-              className="h-full"
-              variants={{
-                hidden: { opacity: 0, y: 50 },
-                show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 10 } }
-              }}
-            >
+            <div key={m.id} className="module-panel-card h-full">
               <ModulePanel
                 id={m.id}
                 title={m.id}
@@ -185,7 +192,7 @@ export default function Home() {
                   {m.component}
                 </div>
               </ModulePanel>
-            </motion.div>
+            </div>
           ))}
         </DashboardGrid>
       </section>
