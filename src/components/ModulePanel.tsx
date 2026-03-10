@@ -14,6 +14,7 @@ interface ModulePanelProps {
     onCollapse: () => void;
     className?: string;
     children: ReactNode;
+    href?: string;
 }
 
 export function ModulePanel({
@@ -23,7 +24,8 @@ export function ModulePanel({
     onExpand,
     onCollapse,
     className,
-    children
+    children,
+    href
 }: ModulePanelProps) {
     return (
         <AnimatePresence>
@@ -59,7 +61,7 @@ export function ModulePanel({
                         </div>
 
                         {/* Scrollable Content */}
-                        <div className="flex-1 overflow-y-auto p-6 sm:p-10 custom-scrollbar">
+                        <div className="flex-1 overflow-y-auto p-6 sm:p-10 custom-scrollbar" data-lenis-prevent="true">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -76,13 +78,20 @@ export function ModulePanel({
                 </motion.div>
             ) : (
                 // Grid View / Collapsed Card
-                <motion.div
+                <motion.a
+                    href={href || "#"}
                     layoutId={`panel-${title}`}
-                    onClick={onExpand}
+                    onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                        if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) {
+                            return; // Let browser natively open in new tab
+                        }
+                        e.preventDefault();
+                        onExpand();
+                    }}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     className={cn(
-                        "glass-panel glass-panel-hover overflow-hidden cursor-pointer group relative transition-colors",
+                        "glass-panel glass-panel-hover overflow-hidden cursor-pointer group relative transition-colors block",
                         className
                     )}
                 >
@@ -103,7 +112,7 @@ export function ModulePanel({
 
                     {/* Animated Background Gradients on Hover */}
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:to-transparent transition-all duration-500 z-0" />
-                </motion.div>
+                </motion.a>
             )}
         </AnimatePresence>
     );

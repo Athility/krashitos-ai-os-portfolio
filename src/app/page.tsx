@@ -58,12 +58,12 @@ export default function Home() {
   }
 
   const modules = [
-    { id: "AI Core", component: <AICore />, className: "md:col-span-2 lg:col-span-2 row-span-1", icon: <Cpu /> },
-    { id: "Knowledge Base", component: <KnowledgeBase />, className: "row-span-1", icon: <UserCircle /> },
-    { id: "Skill Matrix", component: <SkillMatrix />, className: "md:col-span-1 lg:col-span-1", icon: <Database /> },
-    { id: "Project Engine", component: <ProjectEngine />, className: "md:col-span-2 xl:col-span-2", icon: <Rocket /> },
-    { id: "Build Logs", component: <BuildLogs />, className: "md:col-span-2 xl:col-span-2", icon: <Terminal /> },
-    { id: "Communication Terminal", component: <CommTerminal />, className: "md:col-span-1 xl:col-span-1", icon: <Briefcase /> }
+    { id: "AI Core", href: "/m/ai-core", component: <AICore />, className: "md:col-span-2 lg:col-span-2 row-span-1", icon: <Cpu /> },
+    { id: "Knowledge Base", href: "/m/knowledge-base", component: <KnowledgeBase />, className: "row-span-1", icon: <UserCircle /> },
+    { id: "Skill Matrix", href: "/m/skill-matrix", component: <SkillMatrix />, className: "md:col-span-1 lg:col-span-1", icon: <Database /> },
+    { id: "Project Engine", href: "/m/project-engine", component: <ProjectEngine />, className: "md:col-span-2 xl:col-span-2", icon: <Rocket /> },
+    { id: "Build Logs", href: "/m/build-logs", component: <BuildLogs />, className: "md:col-span-2 xl:col-span-2", icon: <Terminal /> },
+    { id: "Communication Terminal", href: "/m/communication-terminal", component: <CommTerminal />, className: "md:col-span-1 xl:col-span-1", icon: <Briefcase /> }
   ];
 
   return (
@@ -77,6 +77,7 @@ export default function Home() {
             id={m.id}
             title={m.id}
             icon={m.icon}
+            href={m.href}
             isExpanded={expandedModuleId === m.id}
             onExpand={() => setExpandedModuleId(m.id)}
             onCollapse={() => setExpandedModuleId(null)}
