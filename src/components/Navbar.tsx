@@ -30,14 +30,14 @@ export function Navbar() {
                     </span>
                 </div>
 
-                <div className="hidden md:flex items-center gap-6">
-                    <div className="flex items-center gap-2 text-sm font-mono text-white/50">
+                <div className="hidden md:flex items-center gap-8 mr-12">
+                    <a href="/projects" className="text-xs font-mono text-white/50 hover:text-primary transition-colors uppercase tracking-widest">Projects</a>
+                    <a href="/skills" className="text-xs font-mono text-white/50 hover:text-primary transition-colors uppercase tracking-widest">Skills</a>
+                    <a href="/about" className="text-xs font-mono text-white/50 hover:text-primary transition-colors uppercase tracking-widest">About</a>
+
+                    <div className="flex items-center gap-2 text-sm font-mono text-white/50 ml-4">
                         <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                         <span>SYS.ONLINE</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm font-mono text-white/50">
-                        <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
-                        <span>MEM.SECURE</span>
                     </div>
                 </div>
 

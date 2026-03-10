@@ -18,7 +18,7 @@ export function AssistantBubble({ onClick, isOpen }: AssistantBubbleProps) {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={onClick}
-            className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-primary flex items-center justify-center cursor-pointer z-50 shadow-[0_0_30px_rgba(0,240,255,0.6)] glow-border overflow-hidden group"
+            className="fixed top-24 right-6 w-14 h-14 rounded-full bg-primary flex items-center justify-center cursor-pointer z-50 shadow-[0_0_30px_rgba(0,240,255,0.6)] glow-border overflow-hidden group"
         >
             <div className="absolute inset-0 bg-gradient-to-br from-primary via-blue-400 to-secondary opacity-80" />
             <Sparkles size={24} className="text-black relative z-10 animate-pulse" />

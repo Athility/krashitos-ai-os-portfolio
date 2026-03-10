@@ -10,8 +10,9 @@ export function KnowledgeBase() {
                 <div>
                     <h3 className="text-2xl font-bold text-white mb-4">Identity File</h3>
                     <p className="text-white/70 leading-relaxed">
-                        I'm <span className="text-primary font-medium">Atharva Shinde</span>, an 18-year-old AI-native builder.
-                        I don't just write code; I orchestrate automated systems and intelligent web tools.
+                        I'm <span className="text-primary font-medium">Atharva Shinde</span>, an 18-year-old AI-native builder specializing in the intersection of artificial intelligence and modern web architecture.
+                        I don't just write code; I orchestrate automated systems and intelligent web tools that solve complex workflow problems.
+                        As a creator of intelligent tools and AI products, I focus on rapid prototyping and seamless AI integration.
                         Currently pursuing my first year of B.Tech in AI & Data Science at Shah and Anchor Kutchhi Engineering College in Mumbai.
                     </p>
                 </div>

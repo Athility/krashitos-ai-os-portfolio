@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { Navbar } from "@/components/Navbar";
 import { DashboardGrid } from "@/components/DashboardGrid";
@@ -8,9 +8,14 @@ import { ModulePanel } from "@/components/ModulePanel";
 import { BootSequence } from "@/components/BootSequence";
 import { AssistantBubble } from "@/components/ai-assistant/AssistantBubble";
 import { ChatWindow } from "@/components/ai-assistant/ChatWindow";
+import { HeroSphere } from "@/components/HeroSphere";
 
 import { Cpu, Terminal, Briefcase, UserCircle, Rocket, Database } from "lucide-react";
 import Lenis from "lenis";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Lazy load actual module content for performance
 const AICore = dynamic(() => import("@/components/modules/AICore").then(mod => mod.AICore));
@@ -24,6 +29,13 @@ export default function Home() {
   const [isBooted, setIsBooted] = useState(false);
   const [expandedModuleId, setExpandedModuleId] = useState<string | null>(null);
   const [isChatOpen, setIsChatOpen] = useState(false);
+
+  // Refs for GSAP
+  const containerRef = useRef<HTMLDivElement>(null);
+  const sphereSectionRef = useRef<HTMLDivElement>(null);
+  const sphereContainerRef = useRef<HTMLDivElement>(null);
+  const introTextRef = useRef<HTMLDivElement>(null);
+  const dashboardContainerRef = useRef<HTMLDivElement>(null);
 
   // Initialize Lenis smooth scroll
   useEffect(() => {
@@ -41,6 +53,66 @@ export default function Home() {
 
     return () => lenis.destroy();
   }, []);
+
+  // GSAP Scroll Animations
+  useEffect(() => {
+    if (!isBooted) return;
+
+    // 1. Sphere Scaling Timeline
+    const sphereTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sphereSectionRef.current,
+        start: "top top",
+        end: "bottom center",
+        scrub: 1,
+        pin: true,
+      }
+    });
+
+    sphereTl.to(sphereContainerRef.current, {
+      scale: 2.5,
+      y: -50,
+      opacity: 0.3,
+      filter: "blur(10px)",
+      duration: 1
+    });
+
+    // 2. Intro Text Reveal
+    const introTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sphereSectionRef.current,
+        start: "center center",
+        end: "bottom top",
+        scrub: 1,
+      }
+    });
+
+    introTl.fromTo(introTextRef.current,
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 1 }
+    ).to(introTextRef.current, { opacity: 0, y: -50, delay: 0.5 });
+
+    // 3. Dashboard Entrance
+    const dashboardTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: dashboardContainerRef.current,
+        start: "top bottom-=100",
+        toggleActions: "play none none reverse",
+      }
+    });
+
+    dashboardTl.from(".module-panel-card", {
+      y: 100,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: "power3.out"
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(t => t.kill());
+    };
+  }, [isBooted]);
 
   // Keyboard shortcut to close modules
   useEffect(() => {
@@ -67,28 +139,57 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen pt-24 pb-16 relative">
+    <main ref={containerRef} className="min-h-screen relative overflow-x-hidden">
       <Navbar />
 
-      <DashboardGrid className="transition-all duration-500 relative z-10">
-        {modules.map((m) => (
-          <ModulePanel
-            key={m.id}
-            id={m.id}
-            title={m.id}
-            icon={m.icon}
-            isExpanded={expandedModuleId === m.id}
-            onExpand={() => setExpandedModuleId(m.id)}
-            onCollapse={() => setExpandedModuleId(null)}
-            className={m.className}
-          >
-            {/* Standardize padding around dynamically loaded modules depending on which is active */}
-            <div className="w-full h-full min-h-full">
-              {m.component}
+      {/* Hero Animation Stage */}
+      <section ref={sphereSectionRef} className="h-screen flex items-center justify-center relative overflow-hidden">
+        <div ref={sphereContainerRef}>
+          <HeroSphere />
+        </div>
+
+        <div
+          ref={introTextRef}
+          className="absolute inset-0 flex items-center justify-center px-6 pointer-events-none"
+        >
+          <div className="text-center">
+            <h1 className="text-5xl md:text-7xl font-display font-bold text-gradient mb-6">ATHARVA SHINDE</h1>
+            <p className="text-xl md:text-2xl text-white/60 font-mono tracking-wider">AI-native builder creating intelligent tools.</p>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/20">
+          <span className="text-[10px] font-mono tracking-widest uppercase">Initiate Core</span>
+          <div className="w-[1px] h-12 bg-gradient-to-b from-primary/50 to-transparent" />
+        </div>
+      </section>
+
+      {/* Main OS Interface */}
+      <section
+        ref={dashboardContainerRef}
+        className="min-h-screen pt-24 pb-32 relative z-10"
+      >
+        <DashboardGrid className="transition-all duration-500">
+          {modules.map((m) => (
+            <div key={m.id} className="module-panel-card h-full">
+              <ModulePanel
+                id={m.id}
+                title={m.id}
+                icon={m.icon}
+                isExpanded={expandedModuleId === m.id}
+                onExpand={() => setExpandedModuleId(m.id)}
+                onCollapse={() => setExpandedModuleId(null)}
+                className={m.className}
+              >
+                <div className="w-full h-full min-h-full">
+                  {m.component}
+                </div>
+              </ModulePanel>
             </div>
-          </ModulePanel>
-        ))}
-      </DashboardGrid>
+          ))}
+        </DashboardGrid>
+      </section>
 
       {/* Background decorations */}
       <div className="fixed inset-0 z-[-1] pointer-events-none">
