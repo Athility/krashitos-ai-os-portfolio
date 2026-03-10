@@ -37,7 +37,7 @@ export default function Home() {
   const introTextRef = useRef<HTMLDivElement>(null);
   const dashboardContainerRef = useRef<HTMLDivElement>(null);
 
-  // Initialize Lenis smooth scroll and sync with GSAP
+  // Initialize Lenis smooth scroll
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -45,19 +45,13 @@ export default function Home() {
       touchMultiplier: 2,
     });
 
-    lenis.on('scroll', ScrollTrigger.update);
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
 
-    const raf = (time: number) => {
-      lenis.raf(time * 1000);
-    };
-
-    gsap.ticker.add(raf);
-    gsap.ticker.lagSmoothing(0);
-
-    return () => {
-      gsap.ticker.remove(raf);
-      lenis.destroy();
-    };
+    return () => lenis.destroy();
   }, []);
 
   // GSAP Scroll Animations
